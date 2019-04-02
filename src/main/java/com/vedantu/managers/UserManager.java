@@ -97,7 +97,17 @@ public class UserManager {
 			return createUserRes;
 		}
 		
-				
+		//String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+		 String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[@#$%]).{6,20})";
+		Pattern pattern_p = Pattern.compile(PASSWORD_PATTERN);
+		Matcher matcher_p = pattern_p.matcher(temp.getPassword());
+		
+		if(!matcher.matches()){
+			createUserRes.setErrorMsg("password must contains one alphabet, one number and one special character ");
+			return createUserRes;
+		}
+		
+		
 		if (null == temp.getPassword() || EMPTY.equals(temp.getPassword().trim())) {
 			createUserRes.setErrorMsg("password is empty");
 			return createUserRes;
