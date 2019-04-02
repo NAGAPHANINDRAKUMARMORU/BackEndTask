@@ -102,7 +102,7 @@ public class UserManager {
 		Pattern pattern_p = Pattern.compile(PASSWORD_PATTERN);
 		Matcher matcher_p = pattern_p.matcher(temp.getPassword());
 		
-		if(!matcher.matches()){
+		if(!matcher_p.matches()){
 			createUserRes.setErrorMsg("password must contains one alphabet, one number and one special character ");
 			return createUserRes;
 		}
@@ -227,6 +227,16 @@ public class UserManager {
 		
 		if (null == signupReq.getNewpassword() || EMPTY.equals(signupReq.getNewpassword().trim())) {
 			changePasswordRes.setErrorMsg("user new password is empty");
+			return changePasswordRes;
+		}
+		
+		//String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+		 String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[@#$%]).{6,20})";
+		Pattern pattern_p = Pattern.compile(PASSWORD_PATTERN);
+		Matcher matcher_p = pattern_p.matcher(signupReq.getNewpassword());
+		
+		if(!matcher_p.matches()){
+			changePasswordRes.setErrorMsg("password must contains one alphabet, one number and one special character ");
 			return changePasswordRes;
 		}
 		
